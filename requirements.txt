@@ -1,0 +1,21 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+asyncpg
+pydantic
+psycopg2-binary
+greenlet
+
+# pip install -r requirements.txt
+# source venv/bin/activate
+#  uvicorn app.main:app --reload  
+#  docker-compose up --build
+
+#  DROPPING THE DATABASE then build again
+# docker-compose down -v
+# docker-compose up --build
+
+# docker-compose down
+# docker-compose up --build
+
+# */

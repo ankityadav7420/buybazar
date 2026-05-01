@@ -1,0 +1,9 @@
+Flow to create order
+POST /users
+POST /products
+POST /cart/items
+GET /cart/USER_UUID_HERE -- check cart
+
+
+POST /cart/items
+POST /orders/checkout/{user_id}
