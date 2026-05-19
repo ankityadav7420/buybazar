@@ -59,4 +59,4 @@ app.include_router(order_router)
 
 @app.get("/")
 async def root():
-    return {"message": "API is running"}
+    return {"message": "API is running.deploying to server"}
