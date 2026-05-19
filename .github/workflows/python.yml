@@ -31,12 +31,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup SSH
+      - name: Setup SSH key
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Deploy to EC2 (Docker Compose)
+      - name: Deploy to EC2 via Docker Compose
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             set -e
@@ -46,11 +46,8 @@ jobs:
             echo "Pulling latest code..."
             git pull origin main
 
-            echo "Stopping old containers..."
-            docker compose down
-
-            echo "Building and starting containers..."
-            docker compose up -d --build
+            echo "Rebuilding containers..."
+            docker compose up -d --build --remove-orphans
 
             echo "Cleaning unused images..."
             docker image prune -f
