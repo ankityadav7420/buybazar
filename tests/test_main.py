@@ -6,7 +6,7 @@ from app.main import app, root
 def test_root_returns_api_status():
     response = asyncio.run(root())
 
-    assert response == {"message": "API is running"}
+    assert response == {"message": "API is running.deployed to server"}
 
 
 def test_app_uses_configured_title():
