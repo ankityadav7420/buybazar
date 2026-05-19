@@ -12,7 +12,7 @@ services:
       POSTGRES_DB: ${DATABASE_NAME}
 
     ports:
-      - '${PORT}:5432' # host:container
+      - '5433:5432'
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -32,35 +32,26 @@ services:
       db:
         condition: service_healthy
 
-    volumes:
-      - .:/app # dev only (remove in prod)
-
     environment:
       APP_NAME: ${APP_NAME}
       APP_ENV: ${APP_ENV}
 
       DATABASE_DRIVER: ${DATABASE_DRIVER}
       DATABASE_HOST: db
-      DATABASE_PORT: 5432 # ✅ always container port
+      DATABASE_PORT: 5432
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_ECHO: ${DATABASE_ECHO}
 
       JWT_SECRET_KEY: ${JWT_SECRET_KEY}
       JWT_EXPIRES_MINUTES: ${JWT_EXPIRES_MINUTES}
 
       MASTER_OTP: ${MASTER_OTP}
-      FIRST_ADMIN_EMAIL: ${FIRST_ADMIN_EMAIL}
-      FIRST_ADMIN_MOBILE: ${FIRST_ADMIN_MOBILE}
-      FIRST_ADMIN_NAME: ${FIRST_ADMIN_NAME}
-      FIRST_ADMIN_AGE: ${FIRST_ADMIN_AGE}
 
     ports:
-      - '${SERVER_PORT}:${SERVER_PORT}'
+      - '8000:8000'
 
-    command: >
-      sh -c "uvicorn app.main:app --host 0.0.0.0 --port ${SERVER_PORT}"
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 volumes:
   postgres_data:
