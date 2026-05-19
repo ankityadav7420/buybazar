@@ -5,6 +5,7 @@ asyncpg
 pydantic
 psycopg2-binary
 greenlet
+pytest
 
 # pip install -r requirements.txt
 # source venv/bin/activate
