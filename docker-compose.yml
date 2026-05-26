@@ -47,11 +47,23 @@ services:
       JWT_EXPIRES_MINUTES: ${JWT_EXPIRES_MINUTES}
 
       MASTER_OTP: ${MASTER_OTP}
+      WATCHFILES_FORCE_POLLING: "true"
 
     ports:
       - '8000:8000'
+      - '5678:5678'
 
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    volumes:
+      - .:/app
+
+    command: >
+      python -Xfrozen_modules=off
+      -m debugpy --listen 0.0.0.0:5678
+      -m uvicorn app.main:app
+      --host 0.0.0.0
+      --port 8000
+      --reload
+      --reload-dir app
 
 volumes:
   postgres_data:

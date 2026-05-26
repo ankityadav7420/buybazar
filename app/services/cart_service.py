@@ -22,6 +22,7 @@ async def get_cart_by_user_id(db: AsyncSession, user_id: UUID):
         select(Cart)
         .options(selectinload(Cart.items))
         .where(Cart.user_id == user_id)
+        .execution_options(populate_existing=True)
     )
     return result.scalar_one_or_none()
 
@@ -77,9 +78,8 @@ async def add_item_to_cart(db: AsyncSession, user_id: UUID, product_id: UUID, qu
         existing_item.quantity = next_quantity
         existing_item.unit_price = product.price
     else:
-        db.add(
+        cart.items.append(
             CartItem(
-                cart_id=cart.id,
                 product_id=product_id,
                 quantity=quantity,
                 unit_price=product.price,

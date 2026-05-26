@@ -52,3 +52,13 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class UserDataResponse(BaseModel):
+    message: str
+    data: UserResponse
+
+
+class UsersListResponse(BaseModel):
+    message: str
+    data: list[UserResponse]

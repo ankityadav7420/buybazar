@@ -7,6 +7,7 @@ psycopg2-binary
 greenlet
 pytest
 pytest-cov
+debugpy
 # pip install -r requirements.txt
 # source venv/bin/activate
 #  uvicorn app.main:app --reload  
@@ -19,4 +20,6 @@ pytest-cov
 # docker-compose down
 # docker-compose up --build
 
+
+#  Run test:  venv/bin/pytest -v --cov=app tests/
 # */

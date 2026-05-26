@@ -31,3 +31,16 @@ docker-compose up --build
 ```
 
 The `.env` file is ignored by Git. Commit `.env.example`, not `.env`.
+
+Rejected flow ---
+pending -> shipped
+shipped -> cancelled
+delivered -> cancelled
+cancelled -> confirmed
+
+---Succesfulll flow ---
+pending -> confirmed
+pending -> cancelled
+confirmed -> shipped
+confirmed -> cancelled
+shipped -> delivered
